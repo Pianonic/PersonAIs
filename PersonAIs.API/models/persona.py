@@ -1,3 +1,4 @@
+import json
 from dataclasses import dataclass
 from typing import List
 from enums.browser import Browser
@@ -54,3 +55,17 @@ class Persona:
     instagram: int
     pinterest: int
     whatsapp: int
+
+def json_to_persona(json_data: str) -> Persona:
+    data = json.loads(json_data)
+    
+    # Convert list of strings to Technology enum objects
+    data['devices'] = [Technology[tech] for tech in data['devices']]
+    
+    # Convert list of strings to Browser enum objects
+    data['browsers'] = [Browser[br] for br in data['browsers']]
+    
+    # Create Persona object using the parsed data
+    persona = Persona(**data)
+    
+    return persona

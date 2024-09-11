@@ -8,27 +8,28 @@ from enums.social_media import SocialMedia
 from enums.technology import Technology
 from models.persona import Persona
 
+SIDENAV_WIDTH = 0
+
 def draw_percentage_bar(pdf: FPDF, label: str, percentage: int, x: int, y: int):
     pdf.set_font('Aptos', size=12)
     pdf.text(x, y, txt=label)
-
+    
     pdf.set_font('Aptos', size=6)
-    pdf.text(pdf.w/3 - 8, y + 1, txt=f'{percentage}%')
+    pdf.text(SIDENAV_WIDTH - 8, y + 1, txt=f'{percentage}%')
 
     pdf.set_fill_color(200, 200, 200)
-    pdf.rect(x, y + 2, pdf.w/3 - 6, 1, "F")
+    pdf.rect(x, y + 2, SIDENAV_WIDTH - 6, 1, "F")
 
     pdf.set_fill_color(255, 255, 255)
-    pdf.rect(x, y + 2, (((pdf.w/3)/100) * percentage) - 6, 1, "F")
+    pdf.rect(x, y + 2, (((SIDENAV_WIDTH)/100) * percentage) - 6, 1, "F")
 
 def draw_rather_bar(pdf: FPDF, label1: str, label2: str, percentage: int, x: int, y: int):
-
     pdf.set_xy(2, y - 3)
     pdf.set_font('Aptos', size=12)
     pdf.cell(w=pdf.w/6.4, text=label1, align='L')
     pdf.cell(w=pdf.w/6.4, text=label2, align='R')
 
-    line_width = pdf.w/3 - 6
+    line_width = SIDENAV_WIDTH - 6
     pdf.set_fill_color(200, 200, 200)
     pdf.rect(x, y + 2, line_width, 1, "F")
 
@@ -95,7 +96,6 @@ async def draw_enum_icons(pdf: FPDF, technologies: List[Technology], icon_height
         aspect_ratio = old_width / old_height
         new_width = aspect_ratio * new_height
         total_icon_width += new_width
-
     
     remaining_space = available_width - total_icon_width
     gap_size = remaining_space / (len(technologies) + 1)
@@ -126,67 +126,75 @@ async def draw_bullet_list(pdf: FPDF, items, bullet='•', x_position: int = 0, 
         y_position = y_position + 6
 
 async def generate(persona: Persona):
+    global SIDENAV_WIDTH
     pdf = FPDF()
     pdf.add_font('Aptos', '', './fonts/Aptos.ttf', uni=True)
     pdf.add_font('Aptos-Bold', '', './fonts/Aptos-Bold.ttf', uni=True)
     pdf.add_page()
 
-    pdf.set_fill_color(21, 96, 130)
-    pdf.rect(0, 0, pdf.w/3, pdf.h, "F")
+    SIDENAV_WIDTH = pdf.w / 3
+    MAIN_WIDTH = pdf.w - SIDENAV_WIDTH
+    MAIN_START_WITH_GAP = SIDENAV_WIDTH + 3
 
-    # Add profile picture
+    BORDER_GAP = 3
+
+    SINGLE_TEXT_WIDTH = MAIN_WIDTH - 5
+    DUAL_TEXT_WIDTH = SINGLE_TEXT_WIDTH / 2
+
+    # Sidenav Section
+    pdf.set_fill_color(21, 96, 130)
+    pdf.rect(0, 0, SIDENAV_WIDTH, pdf.h, "F")
+
+    # Profile picture Section
     img_data = await transform_profile_picture()
     pdf.image(img_data, x=15, y=1, w=40)
 
+    # Accent Rectangle Section
     pdf.set_fill_color(44, 134, 175)
-    pdf.rect(0, 42, pdf.w/3, 25, "F")
+    pdf.rect(0, 42, SIDENAV_WIDTH, 25, "F")
 
-    # Add Name, Title, and Education
+    # Name, Title, and Education Section
     pdf.set_text_color(255, 255, 255)
     pdf.set_font('Aptos-Bold', size=20)
-    pdf.text(3, 50, txt=f"{persona.first_name} {persona.last_name}")
+    pdf.text(BORDER_GAP, 50, txt=f"{persona.first_name} {persona.last_name}")
 
     pdf.set_font('Aptos', size=12)
-    pdf.text(3, 57, txt=persona.profession)
-    pdf.text(3, 64, txt=persona.degree)
+    pdf.text(BORDER_GAP, 57, txt=persona.profession)
+    pdf.text(BORDER_GAP, 64, txt=persona.degree)
 
-    # Section Title for Technologies
+    # Technologies Section
     pdf.set_font('Aptos-Bold', size=20)
-    pdf.text(3, 75, txt="Technologie")
+    pdf.text(BORDER_GAP, 75, txt="Technologie")
 
-    # Draw technology icons
-    available_width = pdf.w / 3
-    await draw_enum_icons(pdf, persona.devices, icon_height=12, y_position=81, available_width=available_width)
+    await draw_enum_icons(pdf, persona.devices, icon_height=12, y_position=81, available_width=SIDENAV_WIDTH)
 
-    # Section Title for Digital Skills
-    pdf.text(3, 105, txt="Digitale Fähigkeiten")
+    # Digital Skills Section 
+    pdf.text(BORDER_GAP, 105, txt="Digitale Fähigkeiten")
 
-    # Draw Percentage Bars
-    draw_percentage_bar(pdf, "Technologie", persona.technology, 3, 112)
-    draw_percentage_bar(pdf, "Software und Apps", persona.software_and_apps, 3, 121)
-    draw_percentage_bar(pdf, "Internet", persona.internet, 3, 130)
-    draw_percentage_bar(pdf, "Social Network", persona.social_network, 3, 139)
+    draw_percentage_bar(pdf, "Technologie", persona.technology, BORDER_GAP, 112)
+    draw_percentage_bar(pdf, "Software und Apps", persona.software_and_apps, BORDER_GAP, 121)
+    draw_percentage_bar(pdf, "Internet", persona.internet, BORDER_GAP, 130)
+    draw_percentage_bar(pdf, "Social Network", persona.social_network, BORDER_GAP, 139)
 
-    # Section Title for Personality
+    # Personality Section
     pdf.set_font('Aptos-Bold', size=20)
-    pdf.text(3, 151, txt="Persönlichkeit")
+    pdf.text(BORDER_GAP, 155, txt="Persönlichkeit")
 
-    draw_rather_bar(pdf, "Extrovertiert", "Introvertiert", persona.extroverted_or_introverted, 3, 157)
-    draw_rather_bar(pdf, "Planer", "Spontan", persona.planner_or_spontaneous, 3, 166)
-    draw_rather_bar(pdf, "Denken", "Fühlen", persona.thinking_or_feeling, 3, 175)
-    draw_rather_bar(pdf, "Konservativ", "Liberal", persona.conservative_or_liberal, 3, 184)
-    draw_rather_bar(pdf, "Anführer", "Nachahmer", persona.leader_or_follower, 3, 193)
+    draw_rather_bar(pdf, "Extrovertiert", "Introvertiert", persona.extroverted_or_introverted, 3, 161)
+    draw_rather_bar(pdf, "Planer", "Spontan", persona.planner_or_spontaneous, BORDER_GAP, 170)
+    draw_rather_bar(pdf, "Denken", "Fühlen", persona.thinking_or_feeling, BORDER_GAP, 179)
+    draw_rather_bar(pdf, "Konservativ", "Liberal", persona.conservative_or_liberal, BORDER_GAP, 188)
+    draw_rather_bar(pdf, "Anführer", "Nachahmer", persona.leader_or_follower, BORDER_GAP, 197)
 
-    # Section Title for Browser
+    # Browser Section
     pdf.set_font('Aptos-Bold', size=20)
-    pdf.text(3, 205, txt="Browser")
+    pdf.text(BORDER_GAP, 212, txt="Browser")
 
-    available_width = pdf.w / 3
-    await draw_enum_icons(pdf, persona.browsers, icon_height=9, y_position=208, available_width=available_width)
+    await draw_enum_icons(pdf, persona.browsers, icon_height=9, y_position=216, available_width=SIDENAV_WIDTH)
 
-    # Section Title for Browser
+    # Appusage Section
     pdf.set_font('Aptos-Bold', size=20)
-    pdf.text(3, 224, txt="Appausnutzung")
+    pdf.text(BORDER_GAP, 234, txt="Appausnutzung")
     
     await draw_enum_icons(pdf, [SocialMedia.TWITTER, 
                                 SocialMedia.FACEBOOK, 
@@ -197,7 +205,7 @@ async def generate(persona: Persona):
                                 SocialMedia.PINTEREST, 
                                 SocialMedia.WHATSAPP], 
                                 icon_height=6, 
-                                y_position=227, 
+                                y_position=238, 
                                 labels=[f"{persona.twitter}%",
                                 f"{persona.facebook}%",
                                 f"{persona.youtube}%",
@@ -206,39 +214,96 @@ async def generate(persona: Persona):
                                 f"{persona.instagram}%",
                                 f"{persona.pinterest}%",
                                 f"{persona.whatsapp}%"],
-                                available_width=available_width)
+                                available_width=SIDENAV_WIDTH)
 
-    pdf.set_xy(pdf.w / 3, 5)
+    # Self Description Section
+    pdf.set_xy(SIDENAV_WIDTH, 9)
     pdf.set_text_color(0, 0, 0)
     pdf.set_font('Aptos', size=12)
 
-    pdf.multi_cell(w=pdf.w - pdf.w / 3, txt=persona.self_description, align='C')
+    pdf.multi_cell(w=MAIN_WIDTH, txt=persona.self_description, align='C')
 
+    # Accent Rectangle Section
     pdf.set_fill_color(44, 134, 175)
-    pdf.rect(pdf.w/3, 42, pdf.w - pdf.w/3, -15, "F")
+    pdf.rect(SIDENAV_WIDTH, 42, MAIN_WIDTH, -15, "F")
 
+    # Info Section
     pdf.set_text_color(255, 255, 255)
-    available_big_width = pdf.w - pdf.w / 3
+    available_big_width = MAIN_WIDTH
     await draw_enum_icons(pdf, 
                           [Info.BIRTHDAY, Info.LOCATION, Info.MARIAGE], 
                             icon_height=6, 
                             y_position=29, 
-                            x_position=available_width,
+                            x_position=SIDENAV_WIDTH,
                             labels=[f"{persona.age} Jahre", persona.residence, persona.marital_status], 
                             available_width=available_big_width)
 
+    # Bio Section
     pdf.set_text_color(0, 0, 0)
     pdf.set_font('Aptos-Bold', size=20)
-    pdf.text(available_width + 3, 51, txt="Szenario/Bio")
+    pdf.text(SIDENAV_WIDTH + BORDER_GAP, 51, txt="Szenario/Bio")
 
-    pdf.set_xy((pdf.w / 3) + 2, 54)
+    pdf.set_xy(SIDENAV_WIDTH + 2, 54)
     pdf.set_font('Aptos', size=12)
-    pdf.multi_cell(w=(pdf.w - pdf.w / 3) - 5, txt=persona.bio, align='J')
+    pdf.multi_cell(w=SINGLE_TEXT_WIDTH, txt=persona.bio, align='J')
+
+    # Goals and Motivation Section
+    pdf.set_font('Aptos-Bold', size=20)
+    pdf.text(MAIN_START_WITH_GAP, 80, txt="Ziele")
+
+    pdf.set_font('Aptos', size=12)
+    await draw_bullet_list(pdf, persona.goals, x_position = MAIN_START_WITH_GAP, y_position=83, max_width=DUAL_TEXT_WIDTH)
 
     pdf.set_font('Aptos-Bold', size=20)
-    pdf.text(available_width + 3, 80, txt="Ziele")
+    pdf.text(MAIN_START_WITH_GAP + DUAL_TEXT_WIDTH, 80, txt="Motivation")
 
     pdf.set_font('Aptos', size=12)
-    await draw_bullet_list(pdf, persona.goals, x_position = available_width + 2, y_position=83, max_width=((pdf.w - pdf.w / 3) - 5)/2)
+    await draw_bullet_list(pdf, persona.motivations, x_position = MAIN_START_WITH_GAP + DUAL_TEXT_WIDTH, y_position=83, max_width=DUAL_TEXT_WIDTH)
+
+    # Challenges Section
+    pdf.set_font('Aptos-Bold', size=20)
+    pdf.text(MAIN_START_WITH_GAP, 109, txt="Herausforderungen")
+
+    pdf.set_font('Aptos', size=12)
+    await draw_bullet_list(pdf, persona.challenges, x_position = MAIN_START_WITH_GAP, y_position=112, max_width=SINGLE_TEXT_WIDTH)
+
+    # Character and Hobbies Section
+    pdf.set_font('Aptos-Bold', size=20)
+    pdf.text(MAIN_START_WITH_GAP, 137, txt="Charakter")
+
+    pdf.set_font('Aptos', size=12)
+    await draw_bullet_list(pdf, persona.characteristics, x_position = MAIN_START_WITH_GAP, y_position=140, max_width=DUAL_TEXT_WIDTH)
+
+    pdf.set_font('Aptos-Bold', size=20)
+    pdf.text(MAIN_START_WITH_GAP + DUAL_TEXT_WIDTH, 137, txt="Hobbys")
+
+    pdf.set_font('Aptos', size=12)
+    await draw_bullet_list(pdf, persona.hobbies, x_position = MAIN_START_WITH_GAP + DUAL_TEXT_WIDTH, y_position=140, max_width=DUAL_TEXT_WIDTH)
+
+    # Subscribed Accounts and Hashtags Section
+    pdf.set_font('Aptos-Bold', size=20)
+    pdf.text(MAIN_START_WITH_GAP, 165, txt="Abos")
+
+    pdf.set_font('Aptos', size=12)
+    await draw_bullet_list(pdf, persona.subscribed_accounts, x_position = MAIN_START_WITH_GAP, y_position=168, max_width=DUAL_TEXT_WIDTH)
+
+    pdf.set_font('Aptos-Bold', size=20)
+    pdf.text(MAIN_START_WITH_GAP + DUAL_TEXT_WIDTH, 165, txt="Hashtags")
+
+    pdf.set_font('Aptos', size=12)
+    await draw_bullet_list(pdf, persona.hashtags, x_position = MAIN_START_WITH_GAP + DUAL_TEXT_WIDTH, y_position=168, max_width=DUAL_TEXT_WIDTH)
+
+    # Favorite Brands and Apps Section
+    pdf.set_font('Aptos-Bold', size=20)
+    pdf.text(MAIN_START_WITH_GAP, 194, txt="Lieblingsmarken")
+
+    pdf.set_font('Aptos', size=12)
+    await draw_bullet_list(pdf, persona.favorite_brands, x_position = MAIN_START_WITH_GAP, y_position=197, max_width=DUAL_TEXT_WIDTH)
+
+    pdf.set_font('Aptos-Bold', size=20)
+    pdf.text(MAIN_START_WITH_GAP + DUAL_TEXT_WIDTH, 194, txt="Lieblingsapps")
+
+    pdf.set_font('Aptos', size=12)
+    await draw_bullet_list(pdf, persona.favorite_apps, x_position = MAIN_START_WITH_GAP + DUAL_TEXT_WIDTH, y_position=197, max_width=DUAL_TEXT_WIDTH)
 
     pdf.output("hello_world.pdf")

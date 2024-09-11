@@ -65,11 +65,11 @@ async def main():
         challenges=["Keeping up with trends", "Work-life balance", "Managing multiple projects"],
         characteristics=["Innovative", "Detail-oriented", "Adaptable"],
         hobbies=["Photography", "Traveling", "Gaming"],
-        subscribed_accounts=["TechCrunch", "MarketingProfs", "AdAge"],
+        subscribed_accounts=["@TechCrunch", "@MarketingProfs", "@AdAge"],
         hashtags=["#DigitalMarketing", "#SocialMedia", "#TechTrends"],
         favorite_brands=["Apple", "Nike", "Adobe"],
         favorite_apps=["LinkedIn", "Slack", "Zoom"],
-        devices=[Technology.ANDROID, Technology.WINDOWS, Technology.MAC],
+        devices=[Technology.ANDROID, Technology.WINDOWS, Technology.MAC, Technology.IPHONE],
         technology=85,
         software_and_apps=90,
         internet=95,
@@ -79,15 +79,15 @@ async def main():
         thinking_or_feeling=50,
         conservative_or_liberal=40,
         leader_or_follower=55,
-        browsers=[Browser.CHROME, Browser.SAFARI, Browser.OPERA],
-        twitter=60,
-        facebook=40,
-        youtube=70,
-        snapchat=30,
-        spotify=50,
-        instagram=80,
-        pinterest=25,
-        whatsapp=65
+        browsers=[Browser.CHROME, Browser.SAFARI, Browser.OPERA, Browser.EDGE, Browser.FIREFOX],
+        twitter=10,
+        facebook=15,
+        youtube=20,
+        snapchat=5,
+        spotify=15,
+        instagram=20,
+        pinterest=5,
+        whatsapp=10
     )
 
     await create_persona_file.generate(persona)
