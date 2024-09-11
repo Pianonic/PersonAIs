@@ -3,6 +3,7 @@ from typing import List, Optional
 from PIL import Image, ImageDraw
 from io import BytesIO
 from fpdf import FPDF
+from enums.info import Info
 from enums.social_media import SocialMedia
 from enums.technology import Technology
 from models.persona import Persona
@@ -78,7 +79,7 @@ async def load_image_and_size_from_enum(enum: Technology) -> tuple[BytesIO, tupl
 
     return image_data, size
 
-async def draw_enum_icons(pdf: FPDF, technologies: List[Technology], icon_height: int = 12, y_position: int = 0, labels: Optional[List[str]] = None):
+async def draw_enum_icons(pdf: FPDF, technologies: List[Technology], icon_height: int = 12, y_position: int = 0, x_position: int = 0, available_width: int = 0, labels: Optional[List[str]] = None):
     if labels is None:
         labels = []
 
@@ -95,11 +96,11 @@ async def draw_enum_icons(pdf: FPDF, technologies: List[Technology], icon_height
         new_width = aspect_ratio * new_height
         total_icon_width += new_width
 
-    available_width = pdf.w / 3
+    
     remaining_space = available_width - total_icon_width
     gap_size = remaining_space / (len(technologies) + 1)
 
-    x_position = gap_size
+    x = gap_size
     label_height = 5
 
     for i, technology in enumerate(technologies):
@@ -108,15 +109,21 @@ async def draw_enum_icons(pdf: FPDF, technologies: List[Technology], icon_height
         aspect_ratio = old_width / old_height
         new_width = aspect_ratio * new_height
 
-        pdf.image(image_data, x=x_position, y=y_position, h=new_height)
+        pdf.image(image_data, x=x + x_position, y=y_position, h=new_height)
 
         if labels:
             pdf.set_y(y_position + new_height + 1)
-            pdf.set_x(x_position)
+            pdf.set_x(x + x_position)
             pdf.set_font('Arial', 'B', 8)
             pdf.cell(new_width, label_height, labels[i], 0, 1, 'C')
 
-        x_position += new_width + gap_size
+        x += new_width + gap_size
+
+async def draw_bullet_list(pdf: FPDF, items, bullet='•', x_position: int = 0, y_position: int = 0, max_width: int = 10):
+    for item in items:
+        pdf.set_xy(x_position, y_position)
+        pdf.multi_cell(max_width, text=f"{bullet} {item}", align='L')
+        y_position = y_position + 6
 
 async def generate(persona: Persona):
     pdf = FPDF()
@@ -148,7 +155,8 @@ async def generate(persona: Persona):
     pdf.text(3, 75, txt="Technologie")
 
     # Draw technology icons
-    await draw_enum_icons(pdf, persona.devices, icon_height=12, y_position=81)
+    available_width = pdf.w / 3
+    await draw_enum_icons(pdf, persona.devices, icon_height=12, y_position=81, available_width=available_width)
 
     # Section Title for Digital Skills
     pdf.text(3, 105, txt="Digitale Fähigkeiten")
@@ -173,12 +181,13 @@ async def generate(persona: Persona):
     pdf.set_font('Aptos-Bold', size=20)
     pdf.text(3, 205, txt="Browser")
 
-    await draw_enum_icons(pdf, persona.browsers, icon_height=9, y_position=208)
+    available_width = pdf.w / 3
+    await draw_enum_icons(pdf, persona.browsers, icon_height=9, y_position=208, available_width=available_width)
 
     # Section Title for Browser
     pdf.set_font('Aptos-Bold', size=20)
     pdf.text(3, 224, txt="Appausnutzung")
-
+    
     await draw_enum_icons(pdf, [SocialMedia.TWITTER, 
                                 SocialMedia.FACEBOOK, 
                                 SocialMedia.YOUTUBE,
@@ -196,6 +205,40 @@ async def generate(persona: Persona):
                                 f"{persona.spotify}%",
                                 f"{persona.instagram}%",
                                 f"{persona.pinterest}%",
-                                f"{persona.whatsapp}%"])
+                                f"{persona.whatsapp}%"],
+                                available_width=available_width)
+
+    pdf.set_xy(pdf.w / 3, 5)
+    pdf.set_text_color(0, 0, 0)
+    pdf.set_font('Aptos', size=12)
+
+    pdf.multi_cell(w=pdf.w - pdf.w / 3, txt=persona.self_description, align='C')
+
+    pdf.set_fill_color(44, 134, 175)
+    pdf.rect(pdf.w/3, 42, pdf.w - pdf.w/3, -15, "F")
+
+    pdf.set_text_color(255, 255, 255)
+    available_big_width = pdf.w - pdf.w / 3
+    await draw_enum_icons(pdf, 
+                          [Info.BIRTHDAY, Info.LOCATION, Info.MARIAGE], 
+                            icon_height=6, 
+                            y_position=29, 
+                            x_position=available_width,
+                            labels=[f"{persona.age} Jahre", persona.residence, persona.marital_status], 
+                            available_width=available_big_width)
+
+    pdf.set_text_color(0, 0, 0)
+    pdf.set_font('Aptos-Bold', size=20)
+    pdf.text(available_width + 3, 51, txt="Szenario/Bio")
+
+    pdf.set_xy((pdf.w / 3) + 2, 54)
+    pdf.set_font('Aptos', size=12)
+    pdf.multi_cell(w=(pdf.w - pdf.w / 3) - 5, txt=persona.bio, align='J')
+
+    pdf.set_font('Aptos-Bold', size=20)
+    pdf.text(available_width + 3, 80, txt="Ziele")
+
+    pdf.set_font('Aptos', size=12)
+    await draw_bullet_list(pdf, persona.goals, x_position = available_width + 2, y_position=83, max_width=((pdf.w - pdf.w / 3) - 5)/2)
 
     pdf.output("hello_world.pdf")
