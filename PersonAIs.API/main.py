@@ -1,48 +1,57 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer, TextStreamer, pipeline
-import torch
+import asyncio
+from enums.browser import Browser
+from enums.technology import Technology
+from models.persona import Persona
+from services import get_aptos_font
+from services import create_persona_file
 
-model_name = "microsoft/Phi-3-mini-4k-instruct"
-cache_dir = "./llm"
+async def main():
+    await setup()
 
-tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
-model = AutoModelForCausalLM.from_pretrained(model_name, cache_dir=cache_dir)
+    persona = Persona(
+        generate_portrait_prompt="A tech-savvy young professional with a passion for social media and digital trends.",
+        first_name="Alex",
+        last_name="Smith",
+        profession="Digital Marketing Specialist",
+        degree="Bachelor's in Marketing",
+        age=28,
+        residence="San Francisco, CA",
+        marital_status="Single",
+        self_description="Creative, driven, and always up-to-date with the latest trends in digital marketing.",
+        bio="Alex is a digital marketing specialist with a knack for social media strategies and a deep understanding of consumer behavior.",
+        goals=["Become a marketing director", "Expand professional network", "Enhance digital skills"],
+        motivations=["Career advancement", "Creative expression", "Networking opportunities"],
+        challenges=["Keeping up with trends", "Work-life balance", "Managing multiple projects"],
+        characteristics=["Innovative", "Detail-oriented", "Adaptable"],
+        hobbies=["Photography", "Traveling", "Gaming"],
+        subscribed_accounts=["TechCrunch", "MarketingProfs", "AdAge"],
+        hashtags=["#DigitalMarketing", "#SocialMedia", "#TechTrends"],
+        favorite_brands=["Apple", "Nike", "Adobe"],
+        favorite_apps=["LinkedIn", "Slack", "Zoom"],
+        devices=[Technology.ANDROID, Technology.WINDOWS, Technology.MAC],
+        technology=85,
+        software_and_apps=90,
+        internet=95,
+        social_network=80,
+        extroverted_or_introverted=60,
+        planner_or_spontaneous=70,
+        thinking_or_feeling=50,
+        conservative_or_liberal=40,
+        leader_or_follower=55,
+        browsers=[Browser.CHROME, Browser.SAFARI, Browser.OPERA],
+        twitter=60,
+        facebook=40,
+        youtube=70,
+        snapchat=30,
+        spotify=50,
+        instagram=80,
+        pinterest=25,
+        whatsapp=65
+    )
 
-# Move model to GPU
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model.to(device)
+    await create_persona_file.generate(persona)
 
-# Notify the user which platform it will use
-platform = "GPU" if torch.cuda.is_available() else "CPU"
-print(f"Using {platform} for inference")
-print(torch.cuda.is_available())
+async def setup():
+    await get_aptos_font.get_font()
 
-pipe = pipeline(
-    "text-generation",
-    model=model,
-    tokenizer=tokenizer,
-)
-
-pipe = pipeline(
-    "text-generation",
-    model=model,
-    tokenizer=tokenizer,
-)
-
-generation_args = {
-    "max_new_tokens": 500,
-    "return_full_text": False,
-    "temperature": 0.0,
-    "do_sample": False,
-}
-
-streamer = TextStreamer(tokenizer)
-
-while True:
-    query = input("Enter your question (or 'exit' to quit): ")
-    
-    if query.lower() == 'exit':
-        break
-
-    full_query = f"<|system|>You are a helpful AI assistant.<|end|><|user|>{query}<|end|><|assistant|>"
-
-    pipe(full_query, **generation_args, streamer=streamer)
+asyncio.run(main())
