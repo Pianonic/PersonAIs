@@ -1,5 +1,5 @@
-> [!NOTE]  
-> The automatic persona generation feature is still in development. Only manual persona creation is available at the moment. We are working to resolve this issue as soon as possible. Thank you for your patience! 🙏
+> [NOTE]
+> The automatic persona generation feature is currently under development. At this time, only manual persona creation is supported. Additionally, a web interface is not yet available.
 
 # PersonAIs
 
