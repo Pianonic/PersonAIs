@@ -1,4 +1,3 @@
-import enum
 from typing import List, Optional
 from PIL import Image, ImageDraw
 from io import BytesIO
@@ -40,7 +39,7 @@ def draw_rather_bar(pdf: FPDF, label1: str, label2: str, percentage: int, x: int
     pdf.ellipse(ball_x - ball_radius, y + 1.25, ball_radius, ball_radius, "F")
 
 async def transform_profile_picture() -> BytesIO:
-    img = Image.open('./image/Anna Müller.jpg').convert("RGBA")
+    img = Image.open('./image/Unknown.png').convert("RGBA")
     mask = Image.new('L', img.size, 0)
     image_draw = ImageDraw.Draw(mask)
 
@@ -306,4 +305,4 @@ async def generate(persona: Persona):
     pdf.set_font('Aptos', size=12)
     await draw_bullet_list(pdf, persona.information.favorite_apps, x_position = MAIN_START_WITH_GAP + DUAL_TEXT_WIDTH, y_position=210, max_width=DUAL_TEXT_WIDTH)
 
-    pdf.output("hello_world.pdf")
+    pdf.output("Persona.pdf")

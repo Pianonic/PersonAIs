@@ -105,7 +105,7 @@ def json_to_persona(json_data: str) -> Persona:
 
 jsona = """{
   "information": {
-    "generate_portrait_prompt": "Ein detailliertes Portrait der Person erstellen",
+    "generate_portrait_prompt": "Ein detaillierter Promt um das Profil Bild zu generieren",
     "first_name": "Vorname",
     "last_name": "Nachname",
     "profession": "Beruf",
