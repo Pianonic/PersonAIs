@@ -1,4 +1,5 @@
-- 🚨 Note: The automatic persona generation feature is temporarily broken. Only manual persona creation is available at the moment. We are working to resolve this issue as soon as possible. Thank you for your patience! 🙏
+> [!NOTE]  
+> The automatic persona generation feature is temporarily broken. Only manual persona creation is available at the moment. We are working to resolve this issue as soon as possible. Thank you for your patience! 🙏
 
 # PersonAIs
 
