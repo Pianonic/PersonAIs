@@ -1,11 +1,11 @@
-> [NOTE]
-> The automatic persona generation feature is currently under development. At this time, only manual persona creation is supported. Additionally, a web interface is not yet available.
-
 # PersonAIs
 
 Welcome to **PersonAIs**! 🚀
 
 **PersonAIs** is a powerful tool that allows you to create AI-generated personas in seconds. Designed primarily for building applications, it can also be used for a variety of other purposes like story development, game design, and more. 🎭✨
+
+> [!NOTE]
+> The automatic persona generation feature is currently under development. At this time, only manual persona creation is supported. Additionally, a web interface is not yet available.
 
 ## Features
 
