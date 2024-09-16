@@ -1,0 +1,189 @@
+ # persona = Persona(
+    #     generate_portrait_prompt="A tech-savvy young professional with a passion for social media and digital trends.",
+    #     first_name="Alex",
+    #     last_name="Smith",
+    #     profession="Digital Marketing Specialist",
+    #     degree="Bachelor's in Marketing",
+    #     age=28,
+    #     residence="San Francisco, CA",
+    #     marital_status="Single",
+    #     self_description="Creative, driven, and always up-to-date with the latest trends in digital marketing.",
+    #     bio="Alex is a digital marketing specialist with a knack for social media strategies and a deep understanding of consumer behavior.",
+    #     goals=["Become a marketing director", "Expand professional network", "Enhance digital skills"],
+    #     motivations=["Career advancement", "Creative expression", "Networking opportunities"],
+    #     challenges=["Keeping up with trends", "Work-life balance", "Managing multiple projects"],
+    #     characteristics=["Innovative", "Detail-oriented", "Adaptable"],
+    #     hobbies=["Photography", "Traveling", "Gaming"],
+    #     subscribed_accounts=["TechCrunch", "MarketingProfs", "AdAge"],
+    #     hashtags=["#DigitalMarketing", "#SocialMedia", "#TechTrends"],
+    #     favorite_brands=["Apple", "Nike", "Adobe"],
+    #     favorite_apps=["LinkedIn", "Slack", "Zoom"],
+    #     devices=[Technology.ANDROID, Technology.WINDOWS, Technology.MAC],
+    #     technology=85,
+    #     software_and_apps=90,
+    #     internet=95,
+    #     social_network=80,
+    #     extroverted_or_introverted=60,
+    #     planner_or_spontaneous=70,
+    #     thinking_or_feeling=50,
+    #     conservative_or_liberal=40,
+    #     leader_or_follower=55,
+    #     browsers=[Browser.CHROME, Browser.SAFARI, Browser.OPERA],
+    #     twitter=60,
+    #     facebook=40,
+    #     youtube=70,
+    #     snapchat=30,
+    #     spotify=50,
+    #     instagram=80,
+    #     pinterest=25,
+    #     whatsapp=65
+    # )
+
+    # persona = Persona(
+    #     generate_portrait_prompt="A tech-savvy young professional with a passion for social media and digital trends.",
+    #     first_name="Alex",
+    #     last_name="Smith",
+    #     profession="Digital Marketing Specialist",
+    #     degree="Bachelor's in Marketing",
+    #     age=28,
+    #     residence="San Francisco, CA",
+    #     marital_status="Single",
+    #     self_description="Ich liebe es, kreative Lösungen für komplexe Probleme zu finden und dabei immer den Kunden im Fokus zu behalten.",
+    #     bio="Anna Müller, 34, aus Zürich, arbeitet seit fünf Jahren als Marketing Managerin. Sie ist verheiratet, hat zwei Kinder und jongliert Karriere und Familie. Aktuell denkt sie über die Balance zwischen Beruf und Familie sowie die nächste grosse Marketingkampagne nach.",
+    #     goals=["Become a marketing director", "Expand professional network", "Enhance digital skills"],
+    #     motivations=["Career advancement", "Creative expression", "Networking opportunities"],
+    #     challenges=["Keeping up with trends", "Work-life balance", "Managing multiple projects"],
+    #     characteristics=["Innovative", "Detail-oriented", "Adaptable"],
+    #     hobbies=["Photography", "Traveling", "Gaming"],
+    #     subscribed_accounts=["@TechCrunch", "@MarketingProfs", "@AdAge"],
+    #     hashtags=["#DigitalMarketing", "#SocialMedia", "#TechTrends"],
+    #     favorite_brands=["Apple", "Nike", "Adobe"],
+    #     favorite_apps=["LinkedIn", "Slack", "Zoom"],
+    #     devices=[Technology.ANDROID, Technology.WINDOWS, Technology.MAC, Technology.IPHONE],
+    #     technology=85,
+    #     software_and_apps=90,
+    #     internet=95,
+    #     social_network=80,
+    #     extroverted_or_introverted=60,
+    #     planner_or_spontaneous=70,
+    #     thinking_or_feeling=50,
+    #     conservative_or_liberal=40,
+    #     leader_or_follower=55,
+    #     browsers=[Browser.CHROME, Browser.SAFARI, Browser.OPERA, Browser.EDGE, Browser.FIREFOX],
+    #     twitter=10,
+    #     facebook=15,
+    #     youtube=20,
+    #     snapchat=5,
+    #     spotify=15,
+    #     instagram=20,
+    #     pinterest=5,
+    #     whatsapp=10
+    # )    
+
+  jsona = """{
+  "information": {
+    "generate_portrait_prompt": "Erstelle ein Bild einer Person mit langem, blonden Haar, die eine spezielle Brille für Sehbeeinträchtigte trägt. Die Person wirkt freundlich und entschlossen. Sie steht vor einem Computer, wobei der Bildschirm vergrößert ist, und sieht konzentriert aus.",
+    "first_name": "Lukas",
+    "last_name": "Schneider",
+    "profession": "Informatik-Berufslernende",
+    "degree": "Berufsausbildung",
+    "age": 22,
+    "residence": "Bern",
+    "marital_status": "Verheiratet",
+    "self_description": "Ich bin ein engagierter Informatik-Lernender, der trotz meiner Sehbeeinträchtigung grossen Wert auf detailliertes Lernen legt und innovative Lernmethoden nutzt.",
+    "bio": "Lukas lebt in Bern und macht eine Ausbildung in Informatik. Da er verschwommen sieht, nutzt er spezielle Hilfsprogramme, um seine Sehbeeinträchtigung zu kompensieren und seine Geräte zu bedienen. Besonders interessiert er sich für die Entwicklung barrierefreier Software.",
+    "goals": ["Barrierefreie Oberfläche nutzen", "Einfaches Lernpläne anpassen", "Fortschritt in Echtzeit verfolgen"],
+    "motivations": ["Selbstvertrauen stärken", "Erfolgreiche Lernfortschritte", "Barrieren überwinden"],
+    "challenges": ["Eingeschränkte Sicht auf digitale Inhalte", "Nutzung von assistiven Technologien", "Anpassung der Lernmaterialien"],
+    "characteristics": ["Geduldig", "Anpassungsfähig", "Technologieaffin"],
+    "hobbies": ["Audio-Bücher", "Schwimmen", "Programmierwettbewerbe"],
+    "subscribed_accounts": ["@Chris Schadler", "@Elon Musk", "@Jane McGonigal"],
+    "hashtags": ["#Accessibility", "#TechForAll", "#InclusiveDesign"],
+    "favorite_brands": ["Microsoft", "Amazon", "Apple"],
+    "favorite_apps": ["VoiceOver", "ZoomText", "NVDA"]
+  },
+  "technology_usage": {
+    "devices": ["IPHONE", "ANDROID", "WINDOWS"]
+  },
+  "digital_skills": {
+    "technology": 89,
+    "software_and_apps": 91,
+    "internet": 94,
+    "social_network": 50
+  },
+  "personality": {
+    "extroverted_or_introverted": 40,
+    "planner_or_spontaneous": 60,
+    "thinking_or_feeling": 70,
+    "conservative_or_liberal": 50,
+    "leader_or_follower": 40
+  },
+  "browser_preferences": {
+    "browsers": ["CHROME", "OPERA", "SAFARI"]
+  },
+  "app_usage": {
+    "twitter": 20,
+    "facebook": 15,
+    "youtube": 30,
+    "snapchat": 5,
+    "spotify": 10,
+    "instagram": 5,
+    "pinterest": 5,
+    "whatsapp": 10
+  }
+}
+"""
+
+    jsona = """{
+  "information": {
+    "generate_portrait_prompt": "Erstelle ein Bild einer Person mit kurzen braunen Haaren, Brille und einem freundlichen Lächeln. Die Person trägt ein einfaches, modernes Outfit und wirkt engagiert und interessiert. Die Person steht vor einem Computerbildschirm und sieht konzentriert aus.",
+    "first_name": "Anna",
+    "last_name": "Müller",
+    "profession": "Informatik-Berufslernende",
+    "degree": "Berufsausbildung",
+    "age": 20,
+    "residence": "Zürich",
+    "marital_status": "Ledig",
+    "self_description": "Ich bin eine motivierte Informatik-Lernende, die gerne neue Technologien ausprobiert und ihre Fähigkeiten ständig verbessert.",
+    "bio": "Anna ist eine engagierte und technikbegeisterte junge Frau, die in Zürich lebt und ihre Ausbildung im Bereich Informatik macht. Sie interessiert sich besonders für Softwareentwicklung und Datenanalyse.",
+    "goals": ["Effiziente Projektverwaltung", "Schneller Fortschritt bei Modulen", "Optimierung der Lernmethoden"],
+    "motivations": ["Erfolgreiche Prüfungen", "Lernen von neuen Technologien", "Karriereaufstieg"],
+    "challenges": ["Zeitmanagement", "Überwältigende Menge an Aufgaben", "Selbstdisziplin"],
+    "characteristics": ["Analytisch", "Zielorientiert", "Technikaffin"],
+    "hobbies": ["Lesen", "Programmieren", "Wandern"],
+    "subscribed_accounts": ["@Tim Cook", "@Mark Zuckerberg", "@Linus Torvalds"],
+    "hashtags": ["#Techie", "#Programming", "#Learning"],
+    "favorite_brands": ["Apple", "Google", "Microsoft"],
+    "favorite_apps": ["VS Code", "Slack", "Trello"]
+  },
+  "technology_usage": {
+    "devices": ["IPHONE", "MAC", "WINDOWS"]
+  },
+  "digital_skills": {
+    "technology": 89,
+    "software_and_apps": 92,
+    "internet": 87,
+    "social_network": 60
+  },
+  "personality": {
+    "extroverted_or_introverted": 30,
+    "planner_or_spontaneous": 70,
+    "thinking_or_feeling": 60,
+    "conservative_or_liberal": 40,
+    "leader_or_follower": 50
+  },
+  "browser_preferences": {
+    "browsers": ["EDGE", "SAFARI"]
+  },
+  "app_usage": {
+    "twitter": 10,
+    "facebook": 20,
+    "youtube": 25,
+    "snapchat": 5,
+    "spotify": 15,
+    "instagram": 10,
+    "pinterest": 5,
+    "whatsapp": 10
+  }
+}
+"""

@@ -1,0 +1,90 @@
+# def generate_persona_part(client, part_name, prompt, context_text):
+#     response = client.chat.completions.create(
+#         model="lmstudio-community/Phi-3.1-mini-4k-instruct-GGUF",
+#         messages=[
+#             {"role": "system", "content": f"Du bist jetzt ein Persona-Generator. Generiere den {part_name} basierend auf dem folgenden Prompt: {prompt}"},
+#             {"role": "user", "content": context_text}
+#         ],
+#         temperature=0.7,
+#     )
+#     return response.choices[0].message
+
+
+
+# client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+
+    # # Initialisiere das JSON-Dokument
+    # persona_json = {
+    #     "information": {},
+    #     "technology_usage": {},
+    #     "digital_skills": {},
+    #     "personality": {},
+    #     "browser_preferences": {},
+    #     "app_usage": {}
+    # }
+
+    # # Definition der Prompts
+    # prompts = {
+    #     "information": {
+    #         "generate_portrait_prompt": "Ein detailliertes Portrait der Person erstellen",
+    #         "first_name": "Vorname der Person",
+    #         "last_name": "Nachname der Person",
+    #         "profession": "Beruf der Person",
+    #         "degree": "Höchster Bildungsabschluss der Person",
+    #         "age": "Alter der Person",
+    #         "residence": "Wohnort der Person",
+    #         "marital_status": "Familienstand der Person",
+    #         "self_description": "Selbstbeschreibung der Person",
+    #         "bio": "Kurze Biographie der Person",
+    #         "goals": "Ziele der Person (3 Ziele)",
+    #         "motivations": "Motivationen der Person (3 Motivationen)",
+    #         "challenges": "Herausforderungen der Person (3 Herausforderungen)",
+    #         "characteristics": "Eigenschaften der Person (3 Eigenschaften)",
+    #         "hobbies": "Hobbys der Person (3 Hobbys)",
+    #         "subscribed_accounts": "Abonnierte Konten der Person (3 Konten)",
+    #         "hashtags": "Hashtags der Person (3 Hashtags)",
+    #         "favorite_brands": "Lieblingsmarken der Person (3 Marken)",
+    #         "favorite_apps": "Lieblings-Apps der Person (3 Apps)"
+    #     },
+    #     "technology_usage": {
+    #         "devices": "Verwendete Geräte der Person (3 Geräte)"
+    #     },
+    #     "digital_skills": {
+    #         "technology": "Digitale Fähigkeiten der Person in Technologie (0-100)",
+    #         "software_and_apps": "Digitale Fähigkeiten der Person in Software und Apps (0-100)",
+    #         "internet": "Digitale Fähigkeiten der Person im Internet (0-100)",
+    #         "social_network": "Digitale Fähigkeiten der Person in sozialen Netzwerken (0-100)"
+    #     },
+    #     "personality": {
+    #         "extroverted_or_introverted": "Persönlichkeit der Person: extrovertiert oder introvertiert (0-100)",
+    #         "planner_or_spontaneous": "Persönlichkeit der Person: Planer oder spontan (0-100)",
+    #         "thinking_or_feeling": "Persönlichkeit der Person: denkend oder fühlend (0-100)",
+    #         "conservative_or_liberal": "Persönlichkeit der Person: konservativ oder liberal (0-100)",
+    #         "leader_or_follower": "Persönlichkeit der Person: Anführer oder Anhänger (0-100)"
+    #     },
+    #     "browser_preferences": {
+    #         "browsers": "Bevorzugte Browser der Person (3 Browser)"
+    #     },
+    #     "app_usage": {
+    #         "twitter": "Nutzung von Twitter in Prozent",
+    #         "facebook": "Nutzung von Facebook in Prozent",
+    #         "youtube": "Nutzung von YouTube in Prozent",
+    #         "snapchat": "Nutzung von Snapchat in Prozent",
+    #         "spotify": "Nutzung von Spotify in Prozent",
+    #         "instagram": "Nutzung von Instagram in Prozent",
+    #         "pinterest": "Nutzung von Pinterest in Prozent",
+    #         "whatsapp": "Nutzung von WhatsApp in Prozent"
+    #     }
+    # }
+
+    # # Generiere die einzelnen Teile des JSON
+    # for section, prompts_dict in prompts.items():
+    #     for key, prompt in prompts_dict.items():
+    #         context_text = json.dumps(persona_json) if section in persona_json else ''
+    #         part = generate_persona_part(client, key, prompt, context_text)
+    #         # Füge die generierten Daten in das JSON-Dokument ein
+    #         if section not in persona_json:
+    #             persona_json[section] = {}
+    #         persona_json[section][key] = part
+
+    # print(json.dumps(persona_json, indent=4))

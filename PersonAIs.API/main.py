@@ -1,98 +1,68 @@
 import asyncio
-from enums.browser import Browser
-from enums.technology import Technology
-from models.persona import Persona
-from services import get_aptos_font
-from services import create_persona_file
+from models.persona import json_to_persona
+from services import create_persona_file, get_aptos_font
+
 
 async def main():
-    await setup()
+    
+    
+    jsona = """{
+      "information": {
+        "generate_portrait_prompt": "Ein detaillierter Promt um das Profil Bild zu generieren",
+        "first_name": "Vorname",
+        "last_name": "Nachname",
+        "profession": "Beruf",
+        "degree": "Höchster Bildungsabschluss",
+        "age": 0,
+        "residence": "Wohnort",
+        "marital_status": "Familienstand",
+        "self_description": "Selbstbeschreibung",
+        "bio": "Kurze Biographie",
+        "goals": ["Ziel 1", "Ziel 2", "Ziel 3"],
+        "motivations": ["Motivation 1", "Motivation 2", "Motivation 3"],
+        "challenges": ["Herausforderung 1", "Herausforderung 2", "Herausforderung 3"],
+        "characteristics": ["Eigenschaft 1", "Eigenschaft 2", "Eigenschaft 3"],
+        "hobbies": ["Hobby 1", "Hobby 2", "Hobby 3"],
+        "subscribed_accounts": ["@Aboniertes Konto 1", "@Aboniertes Konto 2", "@Aboniertes Konto 3"],
+        "hashtags": ["Hashtag 1", "Hashtag 2", "Hashtag 3"],
+        "favorite_brands": ["Marke 1", "Marke 2", "Marke 3"],
+        "favorite_apps": ["App 1", "App 2", "App 3"]
+      },
+      "technology_usage": {
+        "devices": ["IPHONE", "ANDROID", "MAC", "WINDOWS"]
+      },
+      "digital_skills": {
+        "technology": 0,
+        "software_and_apps": 0,
+        "internet": 0,
+        "social_network": 0
+      },
+      "personality": {
+        "extroverted_or_introverted": 0,
+        "planner_or_spontaneous": 0,
+        "thinking_or_feeling": 0,
+        "conservative_or_liberal": 0,
+        "leader_or_follower": 0
+      },
+      "browser_preferences": {
+        "browsers": ["CHROME", "SAFARI", "FIREFOX", "OPERA", "EDGE"]
+      },
+      "app_usage": {
+        "twitter": 0,
+        "facebook": 0,
+        "youtube": 0,
+        "snapchat": 0,
+        "spotify": 0,
+        "instagram": 0,
+        "pinterest": 0,
+        "whatsapp": 0
+      }
+    }"""
 
-    # persona = Persona(
-    #     generate_portrait_prompt="A tech-savvy young professional with a passion for social media and digital trends.",
-    #     first_name="Alex",
-    #     last_name="Smith",
-    #     profession="Digital Marketing Specialist",
-    #     degree="Bachelor's in Marketing",
-    #     age=28,
-    #     residence="San Francisco, CA",
-    #     marital_status="Single",
-    #     self_description="Creative, driven, and always up-to-date with the latest trends in digital marketing.",
-    #     bio="Alex is a digital marketing specialist with a knack for social media strategies and a deep understanding of consumer behavior.",
-    #     goals=["Become a marketing director", "Expand professional network", "Enhance digital skills"],
-    #     motivations=["Career advancement", "Creative expression", "Networking opportunities"],
-    #     challenges=["Keeping up with trends", "Work-life balance", "Managing multiple projects"],
-    #     characteristics=["Innovative", "Detail-oriented", "Adaptable"],
-    #     hobbies=["Photography", "Traveling", "Gaming"],
-    #     subscribed_accounts=["TechCrunch", "MarketingProfs", "AdAge"],
-    #     hashtags=["#DigitalMarketing", "#SocialMedia", "#TechTrends"],
-    #     favorite_brands=["Apple", "Nike", "Adobe"],
-    #     favorite_apps=["LinkedIn", "Slack", "Zoom"],
-    #     devices=[Technology.ANDROID, Technology.WINDOWS, Technology.MAC],
-    #     technology=85,
-    #     software_and_apps=90,
-    #     internet=95,
-    #     social_network=80,
-    #     extroverted_or_introverted=60,
-    #     planner_or_spontaneous=70,
-    #     thinking_or_feeling=50,
-    #     conservative_or_liberal=40,
-    #     leader_or_follower=55,
-    #     browsers=[Browser.CHROME, Browser.SAFARI, Browser.OPERA],
-    #     twitter=60,
-    #     facebook=40,
-    #     youtube=70,
-    #     snapchat=30,
-    #     spotify=50,
-    #     instagram=80,
-    #     pinterest=25,
-    #     whatsapp=65
-    # )
-
-    persona = Persona(
-        generate_portrait_prompt="A tech-savvy young professional with a passion for social media and digital trends.",
-        first_name="Alex",
-        last_name="Smith",
-        profession="Digital Marketing Specialist",
-        degree="Bachelor's in Marketing",
-        age=28,
-        residence="San Francisco, CA",
-        marital_status="Single",
-        self_description="Ich liebe es, kreative Lösungen für komplexe Probleme zu finden und dabei immer den Kunden im Fokus zu behalten.",
-        bio="Anna Müller, 34, aus Zürich, arbeitet seit fünf Jahren als Marketing Managerin. Sie ist verheiratet, hat zwei Kinder und jongliert Karriere und Familie. Aktuell denkt sie über die Balance zwischen Beruf und Familie sowie die nächste grosse Marketingkampagne nach.",
-        goals=["Become a marketing director", "Expand professional network", "Enhance digital skills"],
-        motivations=["Career advancement", "Creative expression", "Networking opportunities"],
-        challenges=["Keeping up with trends", "Work-life balance", "Managing multiple projects"],
-        characteristics=["Innovative", "Detail-oriented", "Adaptable"],
-        hobbies=["Photography", "Traveling", "Gaming"],
-        subscribed_accounts=["@TechCrunch", "@MarketingProfs", "@AdAge"],
-        hashtags=["#DigitalMarketing", "#SocialMedia", "#TechTrends"],
-        favorite_brands=["Apple", "Nike", "Adobe"],
-        favorite_apps=["LinkedIn", "Slack", "Zoom"],
-        devices=[Technology.ANDROID, Technology.WINDOWS, Technology.MAC, Technology.IPHONE],
-        technology=85,
-        software_and_apps=90,
-        internet=95,
-        social_network=80,
-        extroverted_or_introverted=60,
-        planner_or_spontaneous=70,
-        thinking_or_feeling=50,
-        conservative_or_liberal=40,
-        leader_or_follower=55,
-        browsers=[Browser.CHROME, Browser.SAFARI, Browser.OPERA, Browser.EDGE, Browser.FIREFOX],
-        twitter=10,
-        facebook=15,
-        youtube=20,
-        snapchat=5,
-        spotify=15,
-        instagram=20,
-        pinterest=5,
-        whatsapp=10
-    )
-
-    await create_persona_file.generate(persona)
+    await create_persona_file.generate(json_to_persona(jsona))
 
 async def setup():
-    await get_aptos_font.get_font()
+  await get_aptos_font.get_font()
+  await main()
 
-asyncio.run(main())
+asyncio.run(setup())
