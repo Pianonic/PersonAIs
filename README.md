@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://github.com/Pianonic/PersonAIs/blob/main/Images/PersonAIs_Round.png?raw=true" alt="PianoNic's Music Bot" width="300"/>
+</p>
+
+
 # PersonAIs
 
 Welcome to **PersonAIs**! 🚀
