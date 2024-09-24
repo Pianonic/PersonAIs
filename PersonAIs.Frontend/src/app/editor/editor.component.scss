@@ -1,0 +1,34 @@
+.editor-container{
+    height: calc(100vh - 70px);
+    display: flex;
+    justify-content: space-between;
+
+    .left-side-panel {
+        background-color: red;
+        width: 300px;
+        margin-top: 50px;
+        height: calc(100% - 100px);
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+    
+    .center-panel{
+        height: 100%;
+        border-radius: 20px;
+    }
+    
+    .right-side-panel{
+        background-color: red;
+        width: 300px;
+        margin-top: 50px;
+        height: calc(100% - 100px);
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+    }
+    pdf-viewer{
+        width: 700px;
+        margin-top: 50px;
+        height: 100%;
+    }
+}
+

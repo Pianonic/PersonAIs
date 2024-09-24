@@ -1,0 +1,21 @@
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+$primary-color: #3d5a80;
+$primary-light: #98c1d9;
+$primary-lighter: #e0fbfc;
+
+// Accent colors
+$accent-color: #ee6c4d;
+
+// Dark shades
+$dark-color: #293241;
+
+// CSS Variables for public use
+:root {
+  --primary-color: #{$primary-color};
+  --primary-light: #{$primary-light};
+  --primary-lighter: #{$primary-lighter};
+  --accent-color: #{$accent-color};
+  --dark-color: #{$dark-color};
+}

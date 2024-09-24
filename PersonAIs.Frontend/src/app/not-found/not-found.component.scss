@@ -1,0 +1,27 @@
+.error-page {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: calc(100vh - 70px);
+}
+.error-page h1 {
+    font-size: 10rem;
+    margin-bottom: 1rem;
+}
+.error-page h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.error-page p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+.error-page a {
+    font-size: 1rem;
+    text-decoration: none;
+}
+.error-page a:hover {
+    text-decoration: underline;
+}
