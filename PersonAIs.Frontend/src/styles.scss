@@ -1,21 +1,54 @@
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+* {
+    margin: 0;
+    padding: 0;
+}
 
-$primary-color: #3d5a80;
-$primary-light: #98c1d9;
-$primary-lighter: #e0fbfc;
-
-// Accent colors
-$accent-color: #ee6c4d;
-
-// Dark shades
-$dark-color: #293241;
-
-// CSS Variables for public use
 :root {
-  --primary-color: #{$primary-color};
-  --primary-light: #{$primary-light};
-  --primary-lighter: #{$primary-lighter};
-  --accent-color: #{$accent-color};
-  --dark-color: #{$dark-color};
+    --dark-bg: #181C14; /* Default dark background */
+    --sidebar-bg: #3C3D37; /* Default sidebar background */
+    --card-bg: #3C3D37; /* Default card background */
+    --accent-hover: #697565; /* Default accent */
+    --light-text: #ECDFCC; /* Default light text */
+    --light-bg: #ECDFCC; /* Default light background */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Default shadow */
+    --shadow-hover: rgba(0, 0, 0, 0.2); /* Default hover shadow */
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    color: var(--light-text);
+    background-color: var(--dark-bg);
+}
+
+app-root{
+    display: flex;
+    flex-direction: row;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: var(--accent-hover);
+    color: var(--light-text);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--light-bg);
+    color: var(--dark-bg);
+}
+
+input{
+    border: 1px solid var(--light-bg);
+    border-radius: 4px;
+    background-color: var(--card-bg);
+    color: var(--light-text);
+}
+
+textarea{
+    border: 1px solid var(--light-bg);
+    border-radius: 4px;
+    background-color: var(--card-bg);
 }

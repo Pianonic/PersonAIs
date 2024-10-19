@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { EditorComponent } from './editor/editor.component';
+import { GeneratePersonaComponent } from './generate-persona/generate-persona.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'editor', component: EditorComponent },
-    { path: '**', component: NotFoundComponent }
-];
+    { path: '', component: HomeComponent }, // Default route
+    { path: 'generate-persona', component: GeneratePersonaComponent },
+    { path: 'settings', component: SettingsComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: '**', redirectTo: '' } // Redirect to home for unknown routes
+  ];

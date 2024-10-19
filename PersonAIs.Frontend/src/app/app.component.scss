@@ -1,11 +1,29 @@
-@import "../styles.scss";
+.sidenav{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 40px);
+    padding: 20px;
+    background-color: var(--sidebar-bg);    
+}
 
-header{
-    background: linear-gradient(135deg, #3d5a80, #98c1d9);
+.sidenav a {
+    color: var(--light-text);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
     padding: 10px;
+    border-radius: 4px;
+    background-color: var(--sidebar-bg);
+    transition: background-color 0.2s;
 }
 
-.title{
-    font-weight: bold;
-    font-size: xx-large;
+.sidenav a:hover {
+    background-color: var(--accent-hover);
 }
+
+.main-content{
+    flex-grow: 1;
+    margin: 20px;
+}
+

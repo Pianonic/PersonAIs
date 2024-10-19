@@ -1,0 +1,19 @@
+<h1>Generate Personas</h1>
+
+<div class="prompt-card">
+    <div class="input-group">
+        <label>Input your prompt:</label>
+        <textarea class="prompt" placeholder="Enter your prompt here"></textarea>
+    </div>
+
+    <div class="input-group">
+        <label>Number of personas:</label>
+        <input type="number" class="persona-count" min="1" max="10" value="1">
+        <button class="loading-button" (click)="toggleLoading()">
+            <span *ngIf="!loading">Generate</span>
+            <span *ngIf="loading">Loading...</span>
+        </button>
+    </div>
+</div>
+
+<img *ngIf="loading" src="loading.svg" alt="Loading..." style="max-width: 100%; height: auto;">
