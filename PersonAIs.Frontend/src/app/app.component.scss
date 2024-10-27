@@ -1,10 +1,19 @@
-.sidenav{
+.title {
+    font-weight: bold;
+    color: var(--light-text);
+}
+
+.main-content-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidenav {
     width: 250px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 40px);
-    padding: 20px;
-    background-color: var(--sidebar-bg);    
+    background-color: var(--sidebar-bg);
 }
 
 .sidenav a {
@@ -14,7 +23,6 @@
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 4px;
-    background-color: var(--sidebar-bg);
     transition: background-color 0.2s;
 }
 
@@ -22,8 +30,7 @@
     background-color: var(--accent-hover);
 }
 
-.main-content{
+.main-content {
     flex-grow: 1;
-    margin: 20px;
 }
-
+  

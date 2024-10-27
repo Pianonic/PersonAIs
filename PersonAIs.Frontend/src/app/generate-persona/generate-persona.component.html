@@ -1,19 +1,20 @@
-<h1>Generate Personas</h1>
-
-<div class="prompt-card">
-    <div class="input-group">
-        <label>Input your prompt:</label>
-        <textarea class="prompt" placeholder="Enter your prompt here"></textarea>
+<div class="layout-container">
+    <div class="top-element">
+        <h2>Generate Personas</h2>
+        <p>Harness the potential of our advanced AI to craft personalized personas tailored precisely to your needs.</p>
     </div>
 
-    <div class="input-group">
-        <label>Number of personas:</label>
-        <input type="number" class="persona-count" min="1" max="10" value="1">
-        <button class="loading-button" (click)="toggleLoading()">
-            <span *ngIf="!loading">Generate</span>
-            <span *ngIf="loading">Loading...</span>
-        </button>
+    <div class="bottom-container">
+        <div class="bottom-element-1">
+            <h3>Bottom Element 1</h3>
+            <p>Content for the first bottom element.</p>
+        </div>
+        <div class="bottom-element-2">
+            <h3>Prompt and Setting</h3>
+            <textarea class="fancy-textarea" placeholder="Enter your prompt here..."></textarea>
+            <input type="number" class="persona-count" placeholder="Persona Count" min="1">
+            <button class="generate-persona-button">Generate</button>
+        </div>
     </div>
 </div>
 
-<img *ngIf="loading" src="loading.svg" alt="Loading..." style="max-width: 100%; height: auto;">

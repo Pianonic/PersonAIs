@@ -1,28 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
+
 * {
     margin: 0;
     padding: 0;
 }
 
+// :root {
+//     --dark-bg: #181C14; /* Default dark background */
+//     --sidebar-bg: #3C3D37; /* Default sidebar background */
+//     --card-bg: #3C3D37; /* Default card background */
+//     --accent-hover: #697565; /* Default accent */
+//     --light-text: #ECDFCC; /* Default light text */
+//     --light-bg: #ECDFCC; /* Default light background */
+//     --shadow-color: rgba(0, 0, 0, 0.1); /* Default shadow */
+//     --shadow-hover: rgba(0, 0, 0, 0.2); /* Default hover shadow */
+// }
+
 :root {
-    --dark-bg: #181C14; /* Default dark background */
-    --sidebar-bg: #3C3D37; /* Default sidebar background */
-    --card-bg: #3C3D37; /* Default card background */
-    --accent-hover: #697565; /* Default accent */
-    --light-text: #ECDFCC; /* Default light text */
-    --light-bg: #ECDFCC; /* Default light background */
-    --shadow-color: rgba(0, 0, 0, 0.1); /* Default shadow */
-    --shadow-hover: rgba(0, 0, 0, 0.2); /* Default hover shadow */
+    --dark-bg: #F4F4F4; /* Light mode background */
+    --sidebar-bg: #FFFFFF; /* Sidebar background */
+    --card-bg: #FFFFFF; /* Card background */
+    --accent-hover: #1E3A5F; /* Dark modern blue accent */
+    --light-text: #333333; /* Dark text for contrast */
+    --light-bg: #1e3a5f9a; /* Overall light background */
+    --shadow-color: rgba(0, 0, 0, 0.05); /* Soft shadow */
+    --shadow-hover: rgba(0, 0, 0, 0.1); /* Slightly darker hover shadow */
 }
 
+
 body {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: "M PLUS Rounded 1c", Helvetica, Arial, sans-serif;
     color: var(--light-text);
     background-color: var(--dark-bg);
+    height: 100vh;
 }
 
 app-root{
-    display: flex;
-    flex-direction: row;
+    width: 100%;
+    height: 100%;
 }
 
 button {
