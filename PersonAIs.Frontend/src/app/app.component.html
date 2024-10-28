@@ -2,12 +2,20 @@
   <div class="sidenav">
     <h1 class="title">PersonAIs</h1>
     <br>
-
-    <a routerLink="/home">Home</a>
-    <a routerLink="/generate-persona">Generate Persona</a>
-    <a routerLink="/settings">Settings</a>
-    <a routerLink="/profile">Profile</a>
-  </div>
+    <a routerLink="/projects" routerLinkActive="active">
+      <i class="fa-solid fa-layer-group"></i>
+      Projects
+    </a>
+    <a routerLink="/generate-persona" routerLinkActive="active">
+      <i class="fa-solid fa-gears"></i>
+      Generate Persona
+    </a>
+    <div class="spacer"></div>
+    <a routerLink="/profile" routerLinkActive="active">
+      <i class="fa-solid fa-user"></i>
+      Profile
+    </a>
+  </div>   
   <div class="main-content">
     <router-outlet></router-outlet>
   </div>

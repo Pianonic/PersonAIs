@@ -51,10 +51,19 @@
     height: 20px;
     padding: 10px;
     font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #b3b4b7;
+    outline: none; 
     font-family: "M PLUS Rounded 1c", Helvetica, Arial, sans-serif;
 }
 
 .generate-persona-button {
     margin-top: auto;
     color: white;
+}
+
+.generate-persona-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
 }

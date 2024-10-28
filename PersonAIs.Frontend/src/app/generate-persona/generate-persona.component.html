@@ -3,18 +3,16 @@
         <h2>Generate Personas</h2>
         <p>Harness the potential of our advanced AI to craft personalized personas tailored precisely to your needs.</p>
     </div>
-
     <div class="bottom-container">
         <div class="bottom-element-1">
             <h3>Bottom Element 1</h3>
             <p>Content for the first bottom element.</p>
         </div>
-        <div class="bottom-element-2">
+        <form class="bottom-element-2" [formGroup]="form">
             <h3>Prompt and Setting</h3>
-            <textarea class="fancy-textarea" placeholder="Enter your prompt here..."></textarea>
-            <input type="number" class="persona-count" placeholder="Persona Count" min="1">
-            <button class="generate-persona-button">Generate</button>
-        </div>
+            <textarea class="fancy-textarea" placeholder="Enter your prompt here..." formControlName="prompt"></textarea>
+            <input type="number" class="persona-count" placeholder="Persona Count" min="1" formControlName="personaCount">
+            <button class="generate-persona-button" [disabled]="form.invalid">Generate</button>
+        </form>
     </div>
 </div>
-

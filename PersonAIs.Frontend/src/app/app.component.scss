@@ -8,12 +8,20 @@
     height: 100vh;
 }
 
+.main-content {
+    flex-grow: 1;
+}
+
 .sidenav {
     width: 250px;
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     background-color: var(--sidebar-bg);
+}
+
+.sidenav .spacer {
+    flex-grow: 1;
 }
 
 .sidenav a {
@@ -24,13 +32,20 @@
     padding: 10px;
     border-radius: 4px;
     transition: background-color 0.2s;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.sidenav i {
+    margin-right: 10px;
 }
 
 .sidenav a:hover {
-    background-color: var(--accent-hover);
+    background-color: #556273;
+    color: white;
 }
 
-.main-content {
-    flex-grow: 1;
+.sidenav a.active {
+    background-color: #3d4a56;
+    color: white;
 }
-  
