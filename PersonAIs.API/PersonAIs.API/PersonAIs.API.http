@@ -1,6 +1,0 @@
-@PersonAIs.API_HostAddress = http://localhost:5094
-
-GET {{PersonAIs.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
