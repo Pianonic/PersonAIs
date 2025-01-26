@@ -14,7 +14,6 @@
     <Folder Include="Dtos\" />
     <Folder Include="Enums\" />
     <Folder Include="Validators\" />
-    <Folder Include="Services\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 

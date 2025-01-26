@@ -1,6 +1,6 @@
 ﻿namespace PersonAIs.Application.Commands
 {
-    public class TempCommand
+    public class GeneratePersonaCommand
     {
     }
 }
